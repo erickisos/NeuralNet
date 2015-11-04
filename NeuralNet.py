@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+__author__ = 'Shogo, Isos, elNiño, Jorge'
+
 import math
 import numpy as np
 from Neurona import Neurona

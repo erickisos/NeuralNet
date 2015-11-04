@@ -8,8 +8,8 @@ from math import exp
 class Neurona():
     def __init__(self):
         self.a = float(input("valor de bias: "))
-        self.x = input("valores de entrada (con coma desppues del dato): ")
-        self.w = input("valores de de pesos (con coma desppues del dato): ")
+        self.x = input("valores de entrada (con coma después del dato): ")
+        self.w = input("valores de de pesos (con coma después del dato): ")
 
     def Sumatoria(self, x, w):
         Vk = 0
