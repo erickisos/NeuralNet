@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Shogo, Isos, elNiño, Jorge'
+__author__ = 'Shogo, Isos, Galindo, Jorge'
 
 import math
 import numpy as np
@@ -20,6 +20,7 @@ class Red_Neurona():
         VecSalidas = []
         for fila in range(0, m):
             fil = w[fila,:]
+            fil=np.abs(fil)
             salidas = fil.sum()
             if salidas == 0:
                 VectMedias = VectMedias + 1
@@ -28,20 +29,22 @@ class Red_Neurona():
         VecEnt = []
         for Columna in range(0, m):
             colum = w[:,Columna]
+            colum=np.abs(colum)
             entradas = colum.sum()
             if entradas == 0:
                 Entradas = Entradas + 1
                 VecEnt.append(Columna)
-        Medias = m - (Entradas + VectMedias)
         midEntradas = []
         for i in range(0, m):
             midcol = w[:,i]
+            midcol=np.abs(midcol)
             mident = midcol.sum()
             if mident != 0:
                 midEntradas.append(i)
         midSalidas = []
         for j in range(0, m):
             midfil = w[j,:]
+            midfil=np.abs(midfil)
             midsal=midfil.sum()
             if midsal != 0:
                 midSalidas.append(j)
