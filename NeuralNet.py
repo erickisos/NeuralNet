@@ -77,8 +77,9 @@ class Red_Neurona():
             ns = neo.Neuro.Sumatoria(a, cosoDePrueba)
             sigS = neo.Neuro.Sigmoide(bias, ns)
             b.append(sigS)
-        print b
+        return b
 
 neo = Red_Neurona()
 entr, med, sali, matrix = neo.Segmentacion(neo.Neuro.w)
 c = neo.asignacion(entr, med, sali, matrix)
+print(c)
