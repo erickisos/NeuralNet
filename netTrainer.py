@@ -1,7 +1,7 @@
 from Neurona import Neurona
 from NeuralNet import Red_Neurona
 from math import exp,sqrt
-import random
+from random import random, randint
 import numpy as np
 
 
@@ -16,4 +16,4 @@ class Trainer():
     def addNeurona(self):
         while True:
             neuralNumber = int(input("Ingrese Cuantas neuronas posee la red:\n"))
-            weights = np.zeros()
+            weights = np.zeros(neuralNumber*neuralNumber)

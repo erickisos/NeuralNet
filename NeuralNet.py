@@ -9,16 +9,12 @@ from Neurona import Neurona
 class Red_Neurona():
     def __init__(self):
         self.Neuro = Neurona()
-    def Segmentacion(self, w):
-        try:
-            m = int(math.sqrt(len(w)))
-            w = np.array(w)
-            w = w.reshape(m, m)
-        except:
-            print("no se puede hacer la matrix")
+
+    def Segmentacion(self, w, neuralNumber):
+
         VectMedias=0
         VecSalidas = []
-        for fila in range(0, m):
+        for fila in range(0, neuralNumber):
             fil = w[fila,:]
             fil=np.abs(fil)
             salidas = fil.sum()
@@ -27,7 +23,7 @@ class Red_Neurona():
                 VecSalidas.append(fila)
         Entradas = 0
         VecEnt = []
-        for Columna in range(0, m):
+        for Columna in range(0, neuralNumber):
             colum = w[:,Columna]
             colum=np.abs(colum)
             entradas = colum.sum()
@@ -35,14 +31,14 @@ class Red_Neurona():
                 Entradas = Entradas + 1
                 VecEnt.append(Columna)
         midEntradas = []
-        for i in range(0, m):
+        for i in range(0, neuralNumber):
             midcol = w[:,i]
             midcol=np.abs(midcol)
             mident = midcol.sum()
             if mident != 0:
                 midEntradas.append(i)
         midSalidas = []
-        for j in range(0, m):
+        for j in range(0, neuralNumber):
             midfil = w[j,:]
             midfil=np.abs(midfil)
             midsal=midfil.sum()
@@ -80,6 +76,6 @@ class Red_Neurona():
         return b
 
 neo = Red_Neurona()
-entr, med, sali, matrix = neo.Segmentacion(neo.Neuro.w)
+entr, med, sali, matrix = neo.Segmentacion(neo.Neuro.w, )
 c = neo.asignacion(entr, med, sali, matrix)
 print(c)
