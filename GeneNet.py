@@ -15,7 +15,9 @@ class algoritmoGenetico(object):
         for i in range(0, cantidadIndividuos):
             IndivTotal.append(self.generarIndividuo(valorPorIndividuo))
         IndivTotal = np.array(IndivTotal)
-        print(IndivTotal)
+        return IndivTotal
+
+    def crearFenotipos(self, IndivTotal):
         c = []
         for elemento in range(0, len(IndivTotal)):
             a = list(IndivTotal[elemento, :])
@@ -24,20 +26,20 @@ class algoritmoGenetico(object):
                 b.append(self.dec2bin(ind))
             c.append(b)
         c = np.array(c)
-        print(c)
+        return c
+
+    def crearGenotipos(self, fenotipo):
         z = []
-        for elem in range(0, len(c)):
-            x = list(c[elem, :])
+        for elem in range(0, len(fenotipo)):
+            x = list(fenotipo[elem, :])
             y = []
             for ind in x:
                 y.append(self.bin2dec(ind))
             z.append(y)
         z = np.array(z)
-        print(z)
-        return IndivTotal, c, z
+        return z
 
     def generarIndividuo(self, cantidad):
-
         indiv = []
         for i in range(0, cantidad):
             indiv.append(self.randBi(random()))
@@ -54,12 +56,10 @@ class algoritmoGenetico(object):
         return randomNumber
 
     def dec2bin(self,f):
-
         signo = ""
         if f<0:
             f = abs(f)
             signo = "1"
-
         else:
             signo = "0"
 
@@ -89,10 +89,8 @@ class algoritmoGenetico(object):
             flag = "Negative"
         else:
             flag = "Positive"
-
         j = 0
         valor = float(0.0)
-
         for i in range(1, len(binario)):
             j = i
             if binario[i] == "1":
@@ -104,5 +102,10 @@ class algoritmoGenetico(object):
         valor=round(valor,4)
         return valor
 
-genera = algoritmoGenetico()
-genera.generarIndividuos(10,4)
+genonet = algoritmoGenetico()
+individuos = genonet.generarIndividuos(10,4)
+fenotipos = genonet.crearFenotipos(individuos)
+genotipos = genonet.crearGenotipos(fenotipos)
+print(individuos)
+print(fenotipos)
+print(genotipos)
