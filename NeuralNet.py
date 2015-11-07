@@ -76,6 +76,6 @@ class Red_Neurona():
         return b
 
 neo = Red_Neurona()
-entr, med, sali, matrix = neo.Segmentacion(neo.Neuro.w, )
+entr, med, sali, matrix = neo.Segmentacion(neo.Neuro.w, 10)
 c = neo.asignacion(entr, med, sali, matrix)
 print(c)

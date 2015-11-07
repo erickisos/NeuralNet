@@ -1,11 +1,45 @@
 __author__ = 'erick'
 
-from random import random
+from random import random, randrange
 import numpy as np
 import math
 
 
 class algoritmoGenetico(object):
+
+    def seleccionNatural(self, individuos):
+        pass
+
+    def cruzaEnUnPunto(self, indiv1, indiv2):
+        if len(indiv1) > len(indiv2):
+            maxRange = len(indiv1)
+        else:
+            maxRange = len(indiv2)
+        crossPoint = randrange(0, maxRange)
+        alpha = random()
+        umbral = 0.6
+        if alpha>umbral:
+            descendiente1 = indiv1[0:crossPoint] + indiv2[crossPoint:]
+            descendiente2 = indiv2[0:crossPoint] + indiv1[crossPoint:]
+        else:
+            descendiente1 = indiv2[0:crossPoint] + indiv1[crossPoint:]
+            descendiente2 = indiv1[0:crossPoint] + indiv2[crossPoint:]
+        return descendiente1, descendiente2
+
+
+    def cruzaVariable(self, indiv1, indiv2):
+        pass
+
+    def genMutacion(self, individuo):
+        probabilidad = 0.05
+        factorMutageno = random()
+        for i in range(0, len(individuo)):
+            if factorMutageno < probabilidad:
+                if individuo[i] == 0:
+                    individuo[i] = 1
+                else:
+                    individuo[i] = 0
+        return individuo
 
     def generarIndividuos(self, cantidad, elementos):
 
