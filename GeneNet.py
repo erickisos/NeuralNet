@@ -5,13 +5,14 @@ from random import random, randrange
 import numpy as np
 import math
 
-
-# from NeuralNet import Red_Neurona
-
-
 class algoritmoGenetico(object):
+
+    def __init__(self):
+        pass
+
     def seleccionNatural(self, individuos):
-        self.redNeural = Red_Neurona()
+        #self.redNeural = Red_Neurona()
+        pass
 
     def cruzaEnUnPunto(self, indiv1, indiv2):
         """
@@ -48,22 +49,24 @@ class algoritmoGenetico(object):
         crossPoint_1 = randrange(0, maxRange)
         crossPoint_2 = randrange(0, maxRange)
 
-    # ---------------------------Aqui ira comparacion entre puntos de cruza y seleccion de uniones-------------------------
-
-    def genMutacion(self, individuo):
+    def Mutacion(self, individuo):
         """
         :param individuo: Individuo Tipo Lista, binarizada, los datos binarios deben estar como string
         :return: individuo mutado o no mutado, resultante de pasar por el proceso aleatorio de mutación
         """
-        probabilidad = 0.05
-        factorMutageno = random()
+        individuo = str(individuo)
+        probabilidad = 0.07
+        genMutante = ''
         for i in range(0, len(individuo)):
+            factorMutageno = random()
             if factorMutageno < probabilidad:
                 if individuo[i] == '0':
-                    individuo[i] = '1'
+                    genMutante = genMutante + '1'
                 else:
-                    individuo[i] = '0'
-        return individuo
+                    genMutante = genMutante + '0'
+            else:
+                genMutante = genMutante + individuo[i]
+        return genMutante
 
     def generarIndividuos(self, cantidad, elementos):
         """
@@ -82,7 +85,10 @@ class algoritmoGenetico(object):
         return IndivTotal
 
     def crearFenotipos(self, IndivTotal):
-
+        """
+        :param indivTotal: tipo "np.array" Conjunto de individuos cuyos genes serán convertidos a binario
+        :return: Devuelve un "np.array" con el conjunto de individuos binarizados
+        """
         c = []
         for elemento in range(0, len(IndivTotal)):
             a = list(IndivTotal[elemento, :])
@@ -111,6 +117,9 @@ class algoritmoGenetico(object):
         return indiv
 
     def randBi(self, randomNumber):
+        """
+
+        """
         factorInversor = random()
         factorMezcla = random()
         if factorInversor > factorMezcla:
@@ -176,16 +185,25 @@ print(indiv)
 print(genoin)
 """
 
-prueba = genonet.generarIndividuo(6)
-pruu = genonet.generarIndividuo(6)
-print(prueba, pruu)
-hijo, hija = genonet.cruzaEnUnPunto(prueba, pruu)
-print(hijo)
+papa = genonet.generarIndividuo(6)
+mama = genonet.generarIndividuo(6)
+print(papa, mama)
+hijo, hija = genonet.cruzaEnUnPunto(papa, mama)
+print(hijo, hija)
 hijos = [hijo, hija]
 hijos = np.array(hijos)
-print(hijos)
 hijos = genonet.crearFenotipos(hijos)
-print(hijos)
 hijo = hijos[0]
 hija = hijos[1]
-print(hijo)
+newHijo = []
+for elemento in range(len(hijo)):
+     newHijo.append(genonet.Mutacion(hijo[elemento]))
+newHija = []
+for elemento in range(len(hija)):
+     newHija.append(genonet.Mutacion(hija[elemento]))
+hijos = [newHijo, newHija]
+hijos = np.array(hijos)
+newHijos = genonet.crearGenotipos(hijos)
+hijo = newHijos[0]
+hija = newHijos[1]
+print(hijo, hija)
