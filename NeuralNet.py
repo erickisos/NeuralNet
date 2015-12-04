@@ -10,6 +10,9 @@ class Red_Neurona():
     def __init__(self):
         self.Neuro = Neurona()
 
+    def generarPesos(self, neuronas):
+
+
     def Segmentacion(self, w, neuralNumber):
 
         VectMedias=0

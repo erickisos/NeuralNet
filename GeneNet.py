@@ -10,6 +10,18 @@ class algoritmoGenetico(object):
     def __init__(self):
         pass
 
+    def generarPesosRandom(self, individuos):
+        newPesos = []
+        pesos = np.ones((individuos, individuos))
+        for renglon in pesos:
+            newrenglon = []
+            for peso in renglon:
+                newPeso = self.randBi(random())
+                newrenglon.append(newPeso)
+            newPesos.append(newrenglon)
+        print(newrenglon)
+
+
     def seleccionNatural(self, individuos):
         #self.redNeural = Red_Neurona()
         pass
@@ -48,6 +60,21 @@ class algoritmoGenetico(object):
             maxRange = len(indiv2)
         crossPoint_1 = randrange(0, maxRange)
         crossPoint_2 = randrange(0, maxRange)
+        if crossPoint_1 > crossPoint_2:
+            valorLoco = crossPoint_1
+            crossPoint_1 = crossPoint_2
+            crossPoint_2 = valorLoco
+        alpha = random()
+        umbral = random()
+        if alpha > umbral:
+            descendiente1 = indiv2[:crossPoint_1] + indiv1[crossPoint_1:crossPoint_2] + indiv2[crossPoint_2:]
+            descendiente2 = indiv1[:crossPoint_1] + indiv2[crossPoint_1:crossPoint_2] + indiv1[crossPoint_2:]
+
+        else:
+            descendiente2 = indiv2[:crossPoint_1] + indiv1[crossPoint_1:crossPoint_2] + indiv2[crossPoint_2:]
+            descendiente1 = indiv1[:crossPoint_1] + indiv2[crossPoint_1:crossPoint_2] + indiv1[crossPoint_2:]
+
+        return descendiente1, descendiente2
 
     def Mutacion(self, individuo):
         """
@@ -86,7 +113,7 @@ class algoritmoGenetico(object):
 
     def crearFenotipos(self, IndivTotal):
         """
-        :param indivTotal: tipo "np.array" Conjunto de individuos cuyos genes serán convertidos a binario
+        :param IndivTotal: tipo "np.array" Conjunto de individuos cuyos genes serán convertidos a binario
         :return: Devuelve un "np.array" con el conjunto de individuos binarizados
         """
         c = []
@@ -184,11 +211,11 @@ genoin = genonet.crearFenotipos(indiv)
 print(indiv)
 print(genoin)
 """
-
+"""
 papa = genonet.generarIndividuo(6)
 mama = genonet.generarIndividuo(6)
-print(papa, mama)
-hijo, hija = genonet.cruzaEnUnPunto(papa, mama)
+print papa, mama
+hijo, hija = genonet.cruzaVariable(papa, mama)
 print(hijo, hija)
 hijos = [hijo, hija]
 hijos = np.array(hijos)
@@ -206,4 +233,5 @@ hijos = np.array(hijos)
 newHijos = genonet.crearGenotipos(hijos)
 hijo = newHijos[0]
 hija = newHijos[1]
-print(hijo, hija)
+print(hijo, hija)"""
+genonet.generarPesosRandom(10)
